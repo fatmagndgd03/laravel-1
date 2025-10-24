@@ -17,6 +17,16 @@ class Kullanici extends Controller
         return view('register');
     }
 
+    public function magazaGoster()
+    {
+        return view('shop');
+    }
+
+    public function anasayfaGoster()
+    {
+        return view('index');
+    }
+
     public function uyeKaydet(Request $request)
     {
         $veriler = $request->all();
