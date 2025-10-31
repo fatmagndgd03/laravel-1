@@ -39,6 +39,12 @@
 <div class="login-container">
     <div class="card login-card">
         <div class="card-body p-4 p-md-5">
+            @if (session('mesaj'))
+                <div class="alert alert-danger">
+                    {{ session('mesaj') }}
+                </div>
+            @endif
+
             <h3 class="card-title text-center mb-4 fw-bold text-primary">Proje Adı</h3>
             <p class="text-center text-muted mb-4">Oturum açmak için bilgilerinizi girin</p>
 

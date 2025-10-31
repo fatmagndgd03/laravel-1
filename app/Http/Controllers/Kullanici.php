@@ -27,6 +27,11 @@ class Kullanici extends Controller
         return view('index');
     }
 
+    public function bilgilerimGoster()
+    {
+        return view('bilgilerim');
+    }
+
     public function uyeKaydet(Request $request)
     {
         $veriler = $request->all();
