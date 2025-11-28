@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Uye;
 
 class Kullanici extends Controller
 {
@@ -36,28 +37,19 @@ class Kullanici extends Controller
     {
         $veriler = $request->all();
 
-        echo "<h3>Gelen Form Verileri:</h3>";
-         foreach ($veriler as $anahtar => $deger) {
-        // Eğer parola alanıysa hash'le
-        if ($anahtar === 'parola' or $anahtar === 'parolatekrar') {
-            // Hash::make güvenli bir tek-yönlü şifreleme (bcrypt vb.)
-            $hashed = Hash::make($deger);
-
-            // e() ile escape ederek XSS koruması sağlıyoruz
-            echo e($anahtar) . ': ' . e($hashed) . '<br>';
-        } else {
-            // diğer alanları normal yazdır
-            // e() kullanımı güvenlik için önerilir
-            echo e($anahtar) . ': ' . e((string) $deger) . '<br>';
+        if ($veriler['parola'] !== $veriler['parolatekrar']) {
+            return "Parolalar eşleşmiyor!";
         }
-    }
-    
 
-        /* $request->validate([
-            'isim' => 'required|string|max:255',
-            'email' => 'required|email',
-            'sifre' => 'required|min:6',
-        ]); */
+        $uye = new Uye();
+        $uye->ad = $veriler['ad'];
+        $uye->soyad = $veriler['soyad'];
+        $uye->e_posta = $veriler['e_posta'];
+        $uye->parola = Hash::make($veriler['parola']);
+        $uye->yetki = 0;
+        $uye->save();
+
+        return "Üye kaydı başarılı.";
     }
 }
 
