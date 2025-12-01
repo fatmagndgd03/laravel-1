@@ -12,8 +12,8 @@ Route::get('/uye-ol', [Kullanici::class, 'uyeOl']);
 Route::post('/uye-kaydet', [Kullanici::class, 'uyeKaydet']);
 Route::get('/magaza', [Kullanici::class, 'magazaGoster']);
 
-Route::get('/veri-ekle', [VeriController::class, 'create']);
-Route::post('/veri-ekle', [VeriController::class, 'store']);
+Route::get('/urun-ekle', [VeriController::class, 'create']);
+Route::post('/urun-ekle', [VeriController::class, 'store']);
 
 Route::get('/sehir/{id}', [Sehir::class, 'goster'])->where('id', '[0-9]+');
 
