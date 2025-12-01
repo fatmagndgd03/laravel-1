@@ -6,7 +6,13 @@
                 <div class="card">
                     <div class="card-header">Veri Ekle</div>
                     <div class="card-body">
-                        <form action="/urun-ekle" method="POST">
+                        @if(session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+                        <form action="/urun-ekle" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="baslik" class="form-label">Başlık</label>
@@ -17,8 +23,8 @@
                                 <textarea class="form-control" id="icerik" name="icerik" rows="3" required></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="gorsel" class="form-label">Görsel URL (İsteğe bağlı)</label>
-                                <input type="text" class="form-control" id="gorsel" name="gorsel">
+                                <label for="gorsel" class="form-label">Görsel Yükle (İsteğe bağlı)</label>
+                                <input type="file" class="form-control" id="gorsel" name="gorsel" accept=".jpg,.jpeg,.png">
                             </div>
                             <button type="submit" class="btn btn-primary">Kaydet</button>
                         </form>

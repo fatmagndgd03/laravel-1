@@ -14,17 +14,24 @@ class VeriController extends Controller
 
     public function store(Request $request)
     {
-        $veriler = $request->all();
+        $request->validate([
+            'baslik' => 'required',
+            'icerik' => 'required',
+            'gorsel' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
         $veri = new Veri();
-        $veri->baslik = $veriler['baslik'];
-        $veri->icerik = $veriler['icerik'];
-        // Gorsel is nullable, so we check if it exists
-        if (isset($veriler['gorsel'])) {
-            $veri->gorsel = $veriler['gorsel'];
+        $veri->baslik = $request->baslik;
+        $veri->icerik = $request->icerik;
+
+        if ($request->hasFile('gorsel')) {
+            $imageName = time().'.'.$request->gorsel->extension();
+            $request->gorsel->move(public_path('images'), $imageName);
+            $veri->gorsel = $imageName;
         }
+
         $veri->save();
 
-        return "Veri başarıyla kaydedildi.";
+        return redirect()->back()->with('success', 'Veri başarıyla kaydedildi.');
     }
 }
