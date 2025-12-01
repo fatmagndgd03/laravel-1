@@ -27,6 +27,6 @@ Uygulama anahtarını üret:
 php artisan key:generate
 ```
 
-## License
+## Lisans
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Laravel framework'ü [MIT lisansı] (https://opensource.org/licenses/MIT) altında lisanslanmış açık kaynaklı bir yazılımdır.
