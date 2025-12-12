@@ -24,10 +24,15 @@
                                                 <h4>{{ $veri->baslik }}</h4>
                                                 <p>{{ $veri->icerik }}</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <a href="#"
+                                                    <p class="text-dark fs-5 fw-bold mb-0">{{ $veri->fiyat }} TL</p>
+                                                    <a href="/icerik/{{$veri->id}}"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
                                                             class="fa fa-shopping-bag me-2 text-primary"></i>Veriyi
                                                         görüntüle</a>
+                                                    <a href="/sepet/ekle/{{$veri->id}}"
+                                                        class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                            class="fa fa-shopping-cart me-2 text-primary"></i>Sepete
+                                                        Ekle</a>
                                                 </div>
                                             </div>
                                         </div>

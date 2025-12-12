@@ -6,6 +6,7 @@ use App\Models\Veri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Uye;
+use Illuminate\Support\Facades\Auth;
 
 class Kullanici extends Controller
 {
@@ -53,6 +54,34 @@ class Kullanici extends Controller
         $uye->save();
 
         return "Üye kaydı başarılı.";
+    }
+    public function oturumAc(Request $request)
+    {
+        $credentials = $request->validate([
+            'e_posta' => ['required', 'email'],
+            'parola' => ['required'],
+        ]);
+
+        if (Auth::attempt(['e_posta' => $credentials['e_posta'], 'password' => $credentials['parola']], $request->filled('remember'))) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
+        }
+
+        return back()->withErrors([
+            'email' => 'Girdiğiniz bilgiler hatalı.',
+        ])->onlyInput('e_posta');
+    }
+
+    public function cikisYap(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
 

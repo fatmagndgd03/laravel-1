@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Uye extends Model
+class Uye extends Authenticatable
 {
     protected $table = 'uyeler';
 
@@ -15,4 +15,9 @@ class Uye extends Model
         'parola',
         'yetki'
     ];
+
+    public function getAuthPassword()
+    {
+        return $this->parola;
+    }
 }
